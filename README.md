@@ -56,7 +56,8 @@ If using Docker, the Dockerfile and docker-compose.yml are included. Ensure Dock
 To build and run the app with Docker:
 
 ```bash
-docker-compose up --build
+docker build -t kavidaapp:v1 .
+docker-compose up
 ```
 
 ## Running Tests
