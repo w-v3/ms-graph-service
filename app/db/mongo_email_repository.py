@@ -46,3 +46,37 @@ class MongoEmailRepository(IEmailRepository):
                 "status": "Sent",
             },
         )
+
+    async def get_create_update_user(
+        self,
+        email_address:str ,
+        new_contacts:list[str] 
+        ):
+        db = await self.manager.connect()
+       
+        result = await db.users.update_one(
+            {"_id": email_address},            # match criteria
+            {
+            # only on insert, initialize the document
+            "$setOnInsert": {
+                "email":   email_address,
+                "name":    "",
+                "phone":   "",
+                "country": "",
+                "contacts": []                    # start with empty if new
+            },
+            # add each contact, but only if it isn’t already in the array
+            "$addToSet": { 
+                "contacts": { "$each": new_contacts }
+            }
+            },
+            upsert=True
+        )
+        if result.upserted_id:
+            logger.info(f"Created user record for {email_address}")
+        else:
+            logger.debug(f"User {email_address} already exists")
+        
+        if len(new_contacts):
+            logger.info(f"added user contacts for {new_contacts}")
+  

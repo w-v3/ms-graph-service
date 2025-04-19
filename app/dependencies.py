@@ -28,6 +28,7 @@ def get_email_manager():
     return EmailManager(
         mail_client=get_mail_client(),
         email_repo=get_email_repo(),
+        user_email=settings.USER_EMAIL
     )
 
 

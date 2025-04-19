@@ -71,6 +71,9 @@ class Settings(BaseSettings):
     # Email Polling
     EMAIL_RETRIEVAL_INTERVAL_MINUTES: int = Field(..., env="EMAIL_RETRIEVAL_INTERVAL_MINUTES")
 
+    ## OTHER VARIBALES NOT NECESSARILY ENV VARS
+    COLLECTIONS: List[str] = ["users" , "emails"]
+
     class Config:
         # env_file = str(Path(__file__).parent.parent.parent / ".env.docker.new")
         env_file = ".env"

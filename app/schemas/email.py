@@ -5,7 +5,7 @@ from pydantic import BaseModel, EmailStr, Field
 
 
 class EmailBase(BaseModel):
-    recipients: list[str]
+    recipients: list[EmailStr]
     subject: str
     body: str
     attachments: list[str] | None = None

@@ -1,31 +1,33 @@
 version: '3.8'
 
 services:
-  kavida-app:
-    image: kavida-app:v1
-    restart: unless-stopped
-    ports:
-      - "8000:8000"
-    environment:
-      - CLIENT_ID=${CLIENT_ID}
-      - CLIENT_SECRET=${CLIENT_SECRET}
-      - TENANT_ID=${TENANT_ID}
-      - USER_EMAIL=${USER_EMAIL}
-      - MS_GRAPH_API_URL=${MS_GRAPH_API_URL}
-      - MS_GRAPH_AUTH_URL=${MS_GRAPH_AUTH_URL}
-      - SCOPES=${SCOPES}
-      - MONGO_AUTH_USERNAME=${MONGO_AUTH_USERNAME}
-      - DATABASE_NAME=${DATABASE_NAME}
-      - MONGO_AUTH_PASSWORD=${MONGO_AUTH_PASSWORD}
-      - MONGO_SERVER_ADDRESS=mongodb
-      - MONGO_SERVER_PORT=${MONGO_SERVER_PORT}
-      - API_V1_STR=${API_V1_STR}
-      - PROJECT_NAME=${PROJECT_NAME}
+  # kavida-app:
+  #   image: kavidaapp:v1
+  #   restart: unless-stopped
+  #   ports:
+  #     - "8000:8000"
+  #   env_file:
+  #     - .docker.env
+  #   environment:
+  #     - CLIENT_ID=${CLIENT_ID}
+  #     - CLIENT_SECRET=${CLIENT_SECRET}
+  #     - TENANT_ID=${TENANT_ID}
+  #     - USER_EMAIL=${USER_EMAIL}
+  #     - MS_GRAPH_API_URL=${MS_GRAPH_API_URL}
+  #     - MS_GRAPH_AUTH_URL=${MS_GRAPH_AUTH_URL}
+  #     - SCOPES=${SCOPES}
+  #     - MONGO_AUTH_USERNAME=${MONGO_AUTH_USERNAME}
+  #     - DATABASE_NAME=${DATABASE_NAME}
+  #     - MONGO_AUTH_PASSWORD=${MONGO_AUTH_PASSWORD}
+  #     - MONGO_SERVER_ADDRESS=mongodb
+  #     - MONGO_SERVER_PORT=${MONGO_SERVER_PORT}
+  #     - API_V1_STR=${API_V1_STR}
+  #     - PROJECT_NAME=${PROJECT_NAME}
 
-    depends_on:
-      - mongodb
-    networks:
-      - app-network
+  #   depends_on:
+  #     - mongodb
+  #   networks:
+  #     - app-network
 
   mongodb:
     image: mongo:latest
@@ -61,4 +63,4 @@ volumes:
 
 networks:
   app-network:
-    driver: bridge 
+    driver: bridge

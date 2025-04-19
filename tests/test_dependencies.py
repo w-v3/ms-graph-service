@@ -38,9 +38,7 @@ def test_lru_cache_returns_same_instances():
 async def test_run_email_sync_success(mock_get_manager):
     mock_manager = AsyncMock()
     mock_get_manager.return_value = mock_manager
-
     await run_email_sync()
-
     mock_manager.sync_and_store_emails.assert_awaited_once()
 
 

@@ -32,13 +32,16 @@ class MongoConnectionManager(IConnectionManager):
             self.client.close()
             logger.info("MongoDB connection closed")
 
-    async def ensure_database(self):
+    async def ensure_database(self , collections: list[str]):
+    
         try:
             db = await self.connect()
             names = await db.list_collection_names()
-            if self.db_name not in names:
-                await db.create_collection(self.db_name)
-                logger.info(f"Created {self.db_name} collection")
+
+            for name in collections:
+                if name not in names:
+                    await db.create_collection(name)
+                    logger.info(f"Created {name} collection")
         except PyMongoError as e:
             logger.error(f"ensure_database failed: {e}")
             raise

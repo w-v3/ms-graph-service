@@ -47,7 +47,7 @@ scheduler = AsyncIOScheduler()
 
 @app.on_event("startup")
 async def startup():
-    await mongo_mgr.ensure_database()
+    await mongo_mgr.ensure_database(settings.COLLECTIONS)
     scheduler.add_job(
         run_email_sync,
         "interval",
