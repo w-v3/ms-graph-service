@@ -1,0 +1,78 @@
+# pyproject.toml — 📦 Project metadata (PEP 621) & PEP 518 build system
+[project]                                           # 📑 Define project metadata per PEP 621
+name = "your_project_name"                          # Replace with your package name
+version = "0.1.0"                                   # Start with 0.1.0 for initial release
+description = "…"                                   
+readme = "README.md"                               
+requires-python = ">=3.11"                         
+
+[build-system]                                     
+requires = ["setuptools>=42", "wheel"]              # Standard build back-end dependencies
+build-backend = "setuptools.build_meta"             
+
+###############################################################################
+# 🎨 Black — The uncompromising code formatter
+###############################################################################
+[tool.black]
+line-length = 88                                    # Wrap lines at 88 chars (PEP 8 standard) :contentReference[oaicite:0]{index=0}
+target-version = ["py311"]                          # Format for Python 3.11 :contentReference[oaicite:1]{index=1}
+skip-string-normalization = true                    # Preserve existing quote styles
+
+
+###############################################################################
+# ⚡ Ruff — Fast, Rust‑based linter (can also format & sort imports)
+###############################################################################
+[tool.ruff]
+line-length = 88                                    # Match Black & isort :contentReference[oaicite:4]{index=4}
+target-version = "py311"                            # Infer from project Python version :contentReference[oaicite:5]{index=5}
+ignore = [ "RUF013"]                                # Let Black handle line‑length warnings :contentReference[oaicite:7]{index=7}
+exclude = [".venv", "__pycache__","venv","tests"]           # Skip virtualenv and cache dirs
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    "D100",  # Missing docstring in public module
+    "D101",  # Missing docstring in public class
+    "D102",  # Missing docstring in public method
+    "TD002",  # Missing issue link on TODO comment
+    "TD003",  # Missing author in TODO comment
+    "G004",
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["app"]
+force-sort-within-sections = true
+combine-as-imports = true
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+
+###############################################################################
+# 🐍 Mypy — Static type checker
+###############################################################################
+[tool.mypy]
+python_version = "3.11"                             # Type-check for Python 3.11 :contentReference[oaicite:8]{index=8}
+strict = true                                       # Enable all strictness flags (disallow untyped defs, etc.) :contentReference[oaicite:9]{index=9}
+ignore_missing_imports = true
+warn_return_any = true
+warn_unused_configs = true                       # Suppress errors for untyped third‑party libs :contentReference[oaicite:10]{index=10}
+exclude = "venv"                                   # Don’t type-check dependencies
+
+###############################################################################
+# pytest — unit testing
+###############################################################################
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "--strict-markers --tb=short --cov=app --cov-report=term-missing"
+testpaths = [
+    "tests"
+]
+python_files = "test_*.py"
+
+###############################################################################
+# 🔗 Extras: other tools here to be added here e.g. coverage, pytest, pydocstyle
+###############################################################################

@@ -1,0 +1,7 @@
+# Ignore everything
+**
+
+# Allow only the essentials
+!app/
+!requirements.txt
+!Dockerfile
