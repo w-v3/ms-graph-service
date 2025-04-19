@@ -46,7 +46,6 @@ htmlcov/
 .ruff_cache/
 
 .cursor.json
-docker-compose.yml
 settings.json
 token_cache.json
 
